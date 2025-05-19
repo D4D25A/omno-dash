@@ -1,0 +1,43 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Authentication Flow for Omno Rewards
+
+This project uses the [BetterAuth](mdc:https:/www.npmjs.com/package/better-auth) library for customer authentication within the Omno Rewards platform.
+It supports both email/password (credentials) and Google OAuth providers for frictionless login.
+
+## Key Authentication Components:
+
+*   **Core Configuration**: `[lib/auth.ts](mdc:lib/auth.ts)`
+    *   This file initializes `betterAuth` with providers (Google, Email/Password) and the Prisma adapter.
+    *   Environment variables like `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `BETTER_AUTH_SECRET`, and `BETTER_AUTH_URL` are crucial here (see `[.example.env](mdc:.example.env)`).
+
+*   **API Handler**: `[app/api/auth/[...all]/route.ts](mdc:app/api/auth/[...all]/route.ts)`
+    *   This catch-all route handles all authentication API requests (e.g., `/api/auth/signin`, `/api/auth/callback/google`, `/api/auth/signout`).
+    *   It uses `toNextJsHandler` from `better-auth/next-js` and the configuration from `[lib/auth.ts](mdc:lib/auth.ts)`.
+
+*   **Authentication Pages (UI)**:
+    *   **Sign-in Page**: `[app/(auth)/sign-in/page.tsx](mdc:app/(auth)/sign-in/page.tsx)`
+    *   **Sign-up Page**: `app/(auth)/sign-up/page.tsx` (Located in `[app/(auth)/sign-up/](mdc:app/(auth)/sign-up/)`)
+    *   These pages use client-side utilities from `[lib/auth-client.ts](mdc:lib/auth-client.ts)` and form validation schemas from `[lib/auth-schema.ts](mdc:lib/auth-schema.ts)`.
+
+*   **Protected Routes**: 
+    *   The rewards dashboard `[app/dashboard/page.tsx](mdc:app/dashboard/page.tsx)` and related pages are protected and only accessible to authenticated Omno Rewards members.
+    *   Protection is implemented in `[app/dashboard/layout.tsx](mdc:app/dashboard/layout.tsx)` which checks for valid user sessions.
+
+*   **User Context**:
+    *   The user's authentication status and profile is managed through `[context/UserContext.tsx](mdc:context/UserContext.tsx)`.
+    *   This context provides user information to components like `[components/profile-card.tsx](mdc:components/profile-card.tsx)`.
+
+*   **Database Models**: Authentication-related data (users, sessions, accounts for providers) is stored in the database as per `[prisma/schema.prisma](mdc:prisma/schema.prisma)`.
+
+## Authentication Flow:
+
+1.  A customer navigates to a sign-in or sign-up page.
+2.  For credentials, the customer submits a form; for OAuth, they click the Google button.
+3.  Requests are sent to the BetterAuth API endpoint (`/api/auth/...`).
+4.  `[app/api/auth/[...all]/route.ts](mdc:app/api/auth/[...all]/route.ts)` handles the request using the `[lib/auth.ts](mdc:lib/auth.ts)` configuration.
+5.  BetterAuth interacts with the database (via Prisma adapter) and the chosen provider.
+6.  Upon successful authentication, a session is created, and the customer is redirected to the rewards dashboard.

@@ -1,21 +1,23 @@
-# Next Auth Starter 🚀
+# Omno Rewards Platform 🚀
 
-Next Auth Starter is a Next.js 15 boilerplate with built-in authentication using **BetterAuth**. It supports **Google Login** and **BetterAuth credentials**, providing a solid foundation for any Next.js project requiring authentication.
+Omno Rewards is a comprehensive loyalty program platform for Omno, Singapore's home-grown luxury personal care brand. The platform enables customers to earn and redeem points, track their rewards, and enjoy exclusive benefits.
 
 ## ✨ Features
 
-- 🔐 **Authentication with BetterAuth**
-- 🔑 **Google OAuth Login**
-- 🎨 **Modern UI with Tailwind CSS & ShadCN**
-- 🗄️ **Database integration with Prisma & PostgreSQL**
-- ⚡ **Optimized with Next.js 15 App Router**
+- 🔐 **Secure Authentication** with email/password and Google login
+- 💎 **Points Tracking** for customer purchases and tier progression
+- 🎁 **Rewards Management** for redeeming points and special offers
+- 🎨 **Minimalist UI** with black and white design using Tailwind CSS & ShadCN
+- 🗄️ **Database Integration** with Prisma & PostgreSQL for reliable data storage
+- ⚡ **Optimized Performance** with Next.js 15 App Router
 
 ## 🛠️ Tech Stack
 
 - **Framework:** Next.js 15
-- **Auth Provider:** BetterAuth (Credentials & Google Login)
+- **Authentication:** BetterAuth (Credentials & Google Login)
 - **Database:** PostgreSQL with Prisma ORM
-- **Styling:** Tailwind CSS, ShadCN
+- **Styling:** Tailwind CSS, ShadCN, custom Omno design system
+- **Fonts:** Prata (headers) and Poppins (body text)
 
 ## 🚀 Getting Started
 
@@ -25,18 +27,17 @@ Next Auth Starter is a Next.js 15 boilerplate with built-in authentication using
 bun install
 ```
 
-
 ### 2️⃣ Set Up Environment Variables
 Create a .env file and add the necessary credentials:
 
 ```bash
-# Secret key for BetterAuth (Use a strong, random secret)
-BETTER_AUTH_SECRET=<your_better_auth_secret>
+# Secret key for Auth (Use a strong, random secret)
+BETTER_AUTH_SECRET=<your_auth_secret>
 
 # The base URL of your application (Update this for production)
 BETTER_AUTH_URL=http://localhost:3000  # Change this to your production domain in deployment
 
-# PostgreSQL Database Connection URL (Use environment variables in production)
+# PostgreSQL Database Connection URL
 DATABASE_URL="postgresql://<username>:<password>@<host>/<database_name>?sslmode=require"
 
 # Google OAuth Credentials (Required for social login)
@@ -44,13 +45,11 @@ GOOGLE_CLIENT_ID=<your_google_client_id>
 GOOGLE_CLIENT_SECRET=<your_google_client_secret>
 ```
 
-
 ### 3️⃣ Run Database Migrations
 
 ```bash
 bunx prisma migrate dev
 ```
-
 
 ### 4️⃣ Start the Development Server
 
@@ -60,9 +59,26 @@ bun dev
 
 The app will be available at http://localhost:3000.
 
-## 🔗 Live Demo
-Check out the live version: [Auth Starter](https://better-auth-livid.vercel.app/)
+## 📱 Responsive Design
 
+The Omno Rewards platform is fully responsive, providing a seamless experience across desktop and mobile devices. The platform uses a mobile-first approach with breakpoints to ensure optimal viewing on all screen sizes.
 
-# Built by Aayush Ghimire
+## 🌙 Branding Elements
+
+- **Colors:** Black and white minimalist design with sharp corners
+- **Typography:** Prata for headings, Poppins for body text
+- **Logo:** Stylized "Ø" represents "zero nonsense and zero compromise"
+- **Points Symbol:** Points are displayed with the Ø symbol, e.g., "450Ø"
+
+## 🔒 Security
+
+The platform includes several security features:
+- Secure authentication with BetterAuth
+- Protection against common web vulnerabilities (CSRF, XSS)
+- Password protection and email verification
+- Secure session management
+
+---
+
+# Built for Omno: Everything in Equilibrium
 

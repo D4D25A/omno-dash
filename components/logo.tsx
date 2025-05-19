@@ -1,14 +1,18 @@
-import { Lock } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 import React from 'react'
 
 export default function Logo() {
    return (
-      <Link href="/" className="flex items-center gap-2 self-center font-medium">
-         <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
-            <Lock className="size-4" />
-         </div>
-         AuthStarter
+      <Link href="/" className="flex items-center self-center">
+         <Image 
+            src="/logo/Omno_Black_Logo_Full.png"
+            alt="Omno"
+            width={120}
+            height={35}
+            priority
+            className="dark:filter dark:invert"
+         />
       </Link>
    )
 }

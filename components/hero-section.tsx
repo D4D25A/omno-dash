@@ -1,39 +1,74 @@
-import { Button } from "@/components/ui/button";
-import { ExternalLink, Github } from "lucide-react";
-import Link from "next/link";
+"use client"
 
-export default function HeroSection() {
-   return (
-      <section className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
-         <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center">
-            <div className="rounded-full bg-muted px-4 py-1.5 text-sm font-medium">
-               Open Source Authentication Starter
+import Image from "next/image"
+import { Progress } from "@/components/ui/progress"
+
+interface HeroSectionProps {
+  points: number
+  totalPoints: number
+  nextTier: string
+  currentTier: string
+}
+
+export default function HeroSection({ 
+  points = 450, 
+  totalPoints = 1000, 
+  nextTier = "Silver", 
+  currentTier = "Bronze" 
+}: HeroSectionProps) {
+  const progress = (points / totalPoints) * 100;
+  const pointsToNextTier = totalPoints - points;
+
+  return (
+    <div className="w-full h-full relative overflow-hidden border-black border-[1px] bg-neutral-100">
+      {/* Background Image */}
+      <div className="absolute inset-0 w-full h-full">
+        <Image
+          src="/photos/product-shots/Omno-BeautyShot-Solace-A.png"
+          alt="Omno Products"
+          fill
+          sizes="(max-width: 768px) 100vw, 70vw"
+          className="object-cover object-center opacity-90"
+          priority
+        />
+        {/* Gradient overlay for readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
+      </div>
+      
+      {/* Content */}
+      <div className="relative z-10 p-8 flex flex-col h-full justify-center">
+        <div className="space-y-6 max-w-md">
+          <div className="space-y-3">
+            <h2 className="text-sm uppercase tracking-wider font-medium text-white/80">CURRENT POINTS</h2>
+            <div className="flex items-baseline gap-2">
+              <span className="text-6xl font-heading text-white">{points}</span>
+              <div className="h-[40px] flex items-center">
+                <Image
+                  src="/logo/Icon/Omno_Icon_white.png"
+                  alt="Omno"
+                  width={32}
+                  height={40}
+                  className="object-contain h-full w-auto"
+                />
+              </div>
             </div>
-            <h1 className="text-3xl font-bold sm:text-4xl md:text-5xl lg:text-6xl">
-               Next.js 15 Authentication <span className="text-primary">Starter Template</span>
-            </h1>
-            <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
-               A complete, open-source authentication starter with login, registration, and protected routes. Available on GitHub.
+            <p className="text-sm text-white/80">
+              {currentTier} Member • {pointsToNextTier} points to {nextTier}
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-4">
-               <Button asChild size="lg">
-                  <Link
-                     href="https://github.com/devAaus/better-auth"
-                     target="_blank"
-                     className="flex items-center gap-2"
-                  >
-                     <Github className="h-5 w-5" />
-                     <span>Get the Code</span>
-                  </Link>
-               </Button>
-               <Button variant="outline" size="lg" asChild>
-                  <Link href="/sign-up" className="flex items-center gap-2">
-                     <ExternalLink className="h-4 w-4" />
-                     <span>Try the Demo</span>
-                  </Link>
-               </Button>
+          </div>
+          
+          <div className="w-full space-y-2">
+            <div className="flex justify-between text-xs text-white/80">
+              <span>{currentTier}</span>
+              <span>{nextTier}</span>
             </div>
-         </div>
-      </section>
-   )
+            <Progress value={progress} className="h-2 bg-white/20" />
+            <p className="text-xs text-white/80 mt-2">
+              Earn Ø Points with every purchase. Each $1 spent equals 1 Ø Point.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }

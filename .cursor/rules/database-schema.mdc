@@ -1,0 +1,41 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Database Schema for Omno Rewards
+
+This project uses [Prisma](mdc:https:/www.prisma.io) as its ORM to interact with a PostgreSQL database, storing customer information, rewards data, and authentication details.
+
+## Key Database Components:
+
+*   **Prisma Schema**: `[prisma/schema.prisma](mdc:prisma/schema.prisma)`
+    *   This file defines the database models, their fields, and relations.
+    *   Datasource and client generator are also configured here.
+    *   The `DATABASE_URL` environment variable is used to connect to the PostgreSQL instance (see `[.example.env](mdc:.example.env)`).
+
+*   **Prisma Client Initialization**: `[lib/prisma.ts](mdc:lib/prisma.ts)`
+    *   This file instantiates the Prisma client for use throughout the application.
+    *   The BetterAuth adapter `prismaAdapter` in `[lib/auth.ts](mdc:lib/auth.ts)` uses this client instance.
+
+*   **Migrations**: Prisma Migrate is used for schema migrations.
+    *   Run `bunx prisma migrate dev` to apply schema changes (as noted in `[README.md](mdc:README.md)`).
+    *   Migrations are stored in the `prisma/migrations/` directory.
+
+## Core Authentication Models (defined in `[prisma/schema.prisma](mdc:prisma/schema.prisma)`):
+
+*   **`User`**: Stores customer profile information (id, email, name, image, etc.).
+*   **`Account`**: Links a `User` to authentication providers (e.g., "credentials", "google"). Stores provider-specific details.
+*   **`Session`**: Manages customer sessions, storing session tokens and expiration details.
+*   **`Verification`**: Used for storing tokens for processes like email verification or password resets.
+
+## Omno Rewards Models (to be implemented):
+
+Additional models for the rewards system functionality could include:
+
+*   **`RewardsAccount`**: Tracks points balance, tier level, and other reward-specific data for each customer.
+*   **`Purchase`**: Records customer purchases, allowing for points accrual.
+*   **`Redemption`**: Logs when customers redeem their points for rewards.
+*   **`Reward`**: Stores available rewards, their point costs, and other details.
+
+To generate the Prisma client after schema changes or installation, the `postinstall` script in `[package.json](mdc:package.json)` runs `prisma generate`.

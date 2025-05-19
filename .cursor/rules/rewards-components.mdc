@@ -1,0 +1,56 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Omno Rewards UI Components
+
+This project features custom UI components specifically designed for the Omno Rewards platform, following Omno's black and white minimalist aesthetic.
+
+## Key Rewards Components:
+
+*   **Hero Section**: `[components/hero-section.tsx](mdc:components/hero-section.tsx)`
+    *   The main component at the top of the dashboard that prominently displays the customer's points balance.
+    *   Features the Omno "Ø" icon next to the points value.
+    *   Shows progress toward the next rewards tier.
+
+*   **Points Card**: `[components/omno-points-card.tsx](mdc:components/omno-points-card.tsx)`
+    *   Provides detailed information about the customer's Omno Points.
+    *   Includes a progress bar for tier advancement.
+    *   Uses the Omno icon to represent points throughout the interface.
+
+*   **Recent Purchases**: `[components/recent-purchases.tsx](mdc:components/recent-purchases.tsx)`
+    *   Displays the customer's recent purchases.
+    *   Shows points earned for each purchase with the Omno "Ø" icon.
+    *   Provides a clean, chronological view of purchase history.
+
+*   **Product Recommendations**: `[components/product-recommendations.tsx](mdc:components/product-recommendations.tsx)`
+    *   Displays personalized product recommendations based on purchase history.
+    *   Encourages additional purchases and points accumulation.
+
+*   **Profile Card**: `[components/profile-card.tsx](mdc:components/profile-card.tsx)`
+    *   Shows the customer's profile information.
+    *   Displays their current rewards tier status.
+    *   Features clean, minimal design with sharp corners.
+
+*   **Navigation**: `[components/app-sidebar.tsx](mdc:components/app-sidebar.tsx)` and `[components/app-header.tsx](mdc:components/app-header.tsx)`
+    *   Provides navigation between dashboard, profile, orders, and rewards.
+    *   Features the Omno logo prominently in the sidebar.
+    *   Maintains consistent branding throughout the application.
+
+## UI Element Style:
+
+*   **Typography**: 
+    *   Prata font is used for headings (`font-heading` class).
+    *   Poppins font is used for body text (`font-sans` class).
+    *   Font files are loaded locally from `public/fonts/` directory.
+
+*   **UI Components**:
+    *   Located in the `components/ui/` directory.
+    *   Modified ShadCN components with sharp corners to match Omno's aesthetic.
+    *   Consistent black and white color scheme throughout.
+
+*   **Responsive Design**:
+    *   Components adapt to different screen sizes using Tailwind breakpoints.
+    *   Mobile-first approach with the `useIsMobile` hook in `[hooks/use-mobile.ts](mdc:hooks/use-mobile.ts)`.
+

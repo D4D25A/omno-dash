@@ -1,0 +1,28 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Project Overview for Omno Rewards
+
+This is a [Next.js 15](mdc:https:/nextjs.org) project for Omno's customer loyalty and rewards platform. It uses the Next.js App Router architecture.
+
+## Key Files & Directories:
+
+*   **Next.js Configuration**: `[next.config.ts](mdc:next.config.ts)`
+*   **Package Management**: `[package.json](mdc:package.json)` (dependencies and scripts)
+*   **Root Layout**: `[app/layout.tsx](mdc:app/layout.tsx)`
+*   **Global Styles**: `[app/globals.css](mdc:app/globals.css)` (includes custom font configuration)
+*   **Dashboard Page**: `[app/dashboard/page.tsx](mdc:app/dashboard/page.tsx)` (main rewards dashboard)
+*   **API Routes**: `app/api/` (authentication endpoints)
+*   **UI Components**: `components/` (custom components for the Omno Rewards UI)
+*   **Brand Assets**: `public/logo/` and `public/fonts/` (Omno's brand assets and custom fonts)
+*   **Project Readme**: `[README.md](mdc:README.md)` for setup and high-level details.
+
+## Main Application Structure:
+
+The application is structured using the Next.js App Router:
+- The `dashboard/` directory (`[app/dashboard/page.tsx](mdc:app/dashboard/page.tsx)`) contains the main rewards interface
+- Key components like `[components/hero-section.tsx](mdc:components/hero-section.tsx)` display user points and rewards status
+- Reusable UI components in `components/ui/` implement Omno's black and white minimalist design
+- Authentication is managed through BetterAuth integration in `lib/auth.ts`
